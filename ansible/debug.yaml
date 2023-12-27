@@ -1,0 +1,41 @@
+- name: debug
+  hosts:
+    - testserver
+  become: false  # /etc/sudoers jenkins ALL=(ALL:ALL) NOPASSWD: ALL 
+
+  handlers:
+    - name: Debug handler
+      ansible.builtin.debug:
+        msg: "Triggered"
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: "Hello {{ item }}"
+      loop:
+        - world
+        - user
+
+    - name: Ping
+      ansible.builtin.ping:
+        data: "Pong"
+
+    - name: Print user
+      command: id -un
+      register: login
+
+    - debug: msg="Logged in as user {{ login.stdout }}"
+
+    - name: Check Nginx
+      become: true
+      apt: 
+        name: nginx 
+        state: present
+        update_cache: yes
+        
+    - name: Trigger handler
+      become: false
+      template:
+        src: debug.log.j2
+        dest: /home/jenkins/debug.log
+      notify: "Debug handler"
