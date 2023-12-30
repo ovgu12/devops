@@ -9,6 +9,21 @@ services:
       - universal_network
     ports:
       - 80:80
+  
+  dind:
+    image: docker:dind
+    networks:
+      - universal_network
+    ports:
+      - 2376:2376
+    volumes:
+      - dind_certs:/certs
+      - jenkins_certs:/certs/client
+      - jenkins_data:/var/jenkins_home
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    privileged: true
+    command: --storage-driver=overlay2
 
   monitoring:
     image: prom/prometheus:latest
@@ -33,3 +48,6 @@ networks:
 
 volumes:
   grafana_storage: {}
+  dind_certs: {}
+  jenkins_certs: {}
+  jenkins_data: {}

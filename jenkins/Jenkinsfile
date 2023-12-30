@@ -1,3 +1,4 @@
+// Simple declarative pipeline
 pipeline {
     agent none
     tools {
@@ -6,7 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             agent  {
-                label 'agent1'
+                label 'agent'
             }
             steps {
                 sh 'ls -lsa'

@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: {{ .Chart.Name }}-configmap
 data:
-  message: {{ .Values.mysecret }}
+  message: {{ .Values.mysecret | quote }}
