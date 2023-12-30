@@ -1,4 +1,4 @@
 
 # devops
 
-Collection of devops stuffs
+Collection of devop stuffs

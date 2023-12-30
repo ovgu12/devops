@@ -1,14 +1,35 @@
 version: '2'
 
-name: 'mean'
+name: 'universal'
 
 services:
   webserver:
     image: nginx:latest
     networks: 
-      - mean_network
+      - universal_network
     ports:
-      - 3000:80
+      - 80:80
+
+  monitoring:
+    image: prom/prometheus:latest
+    networks:
+      - universal_network
+    ports:
+      - 9090:9090
+    volumes:
+      - ../prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
+
+  grafana:
+    image: grafana/grafana-enterprise:latest
+    networks:
+      - universal_network
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_storage:/var/lib/grafana
 
 networks:
-  mean_network:
+  universal_network:
+
+volumes:
+  grafana_storage: {}
