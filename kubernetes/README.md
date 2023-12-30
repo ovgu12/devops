@@ -1,8 +1,9 @@
 # kubernetes
 
-Simple deployment 2 pods nginx
+Simple nginx chart
+
+Debug chart
 
 ```sh
-kubectl apply -f nginx-deployment.yaml
-kubectl apply -f nginx-service.yaml
+helm install debug ./nginx --dry-run --debug
 ```

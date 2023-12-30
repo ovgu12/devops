@@ -1,4 +1,4 @@
 
-# cli-tech
+# devops
 
-Collection of linux stuffs
+Collection of devops stuffs

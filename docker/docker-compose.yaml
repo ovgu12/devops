@@ -1,0 +1,14 @@
+version: '2'
+
+name: 'mean'
+
+services:
+  webserver:
+    image: nginx:latest
+    networks: 
+      - mean_network
+    ports:
+      - 3000:80
+
+networks:
+  mean_network:

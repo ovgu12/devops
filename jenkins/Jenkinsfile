@@ -1,0 +1,17 @@
+pipeline {
+    agent none
+    tools {
+        maven 'maven'
+    }
+    stages {
+        stage('Build') {
+            agent  {
+                label 'agent1'
+            }
+            steps {
+                sh 'ls -lsa'
+                sh 'mvn --version'
+            }
+        }
+    }
+}
