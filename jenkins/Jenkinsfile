@@ -1,17 +1,12 @@
 // Simple declarative pipeline
 pipeline {
     agent none
-    tools {
-        maven 'maven'
-    }
     stages {
         stage('Build') {
-            agent  {
-                label 'agent'
-            }
+            agent any
             steps {
                 sh 'ls -lsa'
-                sh 'mvn --version'
+                sh 'docker version'
             }
         }
     }
