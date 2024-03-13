@@ -1,0 +1,43 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger: 
+- dev
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  ${{ if eq(variables['Build.SourceBranchName'], 'main') }}: 
+    deployTarget: prod
+  ${{ if eq(variables['Build.SourceBranchName'], 'dev') }}: 
+    deployTarget: dev
+    
+steps:
+- task: CmdLine@2
+  displayName: Deploy target
+  inputs:
+    script: |
+      echo '${{ variables.deployTarget }}'
+
+- script: |
+    pip install azure-devops
+  displayName: Install azure-devops
+
+- task: PythonScript@0
+  displayName: Show projects
+  inputs:
+    scriptSource: 'filePath'
+    scriptPath: './azure/azure-devops.py'
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+- script: |
+    echo $(curl -s -u :$SYSTEM_ACCESSTOKEN 'https://dev.azure.com/Okarben/Spring/_apis/testplan/plans')
+  displayName: Show test plans
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+    
