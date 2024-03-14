@@ -2,8 +2,6 @@ import os
 from azure.devops.connection import Connection
 from msrest.authentication import BasicAuthentication
 
-print(os.environ.get('SYSTEM_ACCESSTOKEN'))
-
 # Fill in with your personal access token and org URL
 personal_access_token = os.environ.get('SYSTEM_ACCESSTOKEN')
 organization_url = 'https://dev.azure.com/Okarben'
