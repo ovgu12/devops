@@ -1,4 +1,4 @@
 
 # devops
 
-Collection of devop stuffs
+Skills for DevOps career

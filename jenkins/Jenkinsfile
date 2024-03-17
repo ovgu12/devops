@@ -1,4 +1,3 @@
-// Simple declarative pipeline
 pipeline {
     agent none
     stages {

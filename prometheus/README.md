@@ -1,3 +1,3 @@
 # prometheus
 
-Default scrape of local metrics.
+Default scrape of local metrics
